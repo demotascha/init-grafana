@@ -12,20 +12,12 @@ provider "grafana" {
     auth  = "admin:gcp"
 }
 
-resource "grafana_folder" "FluentBit" {
-    title = "FluentBit"
-}
-
 resource "grafana_dashboard" "FluentBit" {
     config_json = file("./dashboards/fluent-bit.json")
-    folder      = grafana_folder.FluentBit.id
-}
-
-resource "grafana_folder" "SpringBootObservability" {
-    title = "SpringBootObservability"
+    folder      = "General"
 }
 
 resource "grafana_dashboard" "SpringBootObservability" {
     config_json = file("./dashboards/spring-boot-observability.json")
-    folder      = grafana_folder.SpringBootObservability.id
+    folder      = "General"
 }
