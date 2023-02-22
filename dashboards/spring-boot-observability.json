@@ -896,7 +896,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "sum by(type) (rate({job=\"fluentbit\"} | json | line_format \"{{.log}}\" |~ \"^(\\\\d{4}\\\\-\\\\d{2}\\\\-\\\\d{2})\" | pattern `<_> <_> <_> <_> <type> <_>` | type != \"\" |= \"$log_keyword\"[1m] ))",
+          "expr": "sum by(type) (rate({job=\"fluentbit\"} | json | kubernetes_labels_app = `$app_name` | line_format \"{{.log}}\" |~ \"^(\\\\d{4}\\\\-\\\\d{2}\\\\-\\\\d{2})\" | pattern `<_> <_> <_> <_> <type> <_>` | type != \"\" |= \"$log_keyword\"[1m] ))",
           "queryType": "range",
           "refId": "A"
         }
@@ -934,7 +934,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"fluentbit\"} | json | line_format \"{{.message}}\" |= \"$log_keyword\"",
+          "expr": "{job=\"fluentbit\"} | json | kubernetes_labels_app = `$app_name` | line_format \"{{.message}}\" |= \"$log_keyword\"",
           "queryType": "range",
           "refId": "A"
         }
